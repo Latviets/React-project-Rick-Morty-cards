@@ -1,8 +1,10 @@
-interface ButtonProps {
+import "./style.module.css";
+
+type Props = {
   onClick: () => void;
 }
 
-const Button = ({ onClick }: ButtonProps) => {
+const Button = ({ onClick }: Props) => {
   return (
     <button onClick={onClick}>
       Get Characters

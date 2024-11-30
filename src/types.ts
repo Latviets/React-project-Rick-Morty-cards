@@ -1,21 +1,21 @@
 export interface ApiResponse {
     info: PageInfo;
     results: Character[];
-  }
+}
 
 export interface PageInfo {
     count: number;
     pages: number;
     next: string | null;
     prev: string | null;
-  }
+}
 
-export interface Location {
+interface Location {
     name: string;
     url: string;
-  }
-  
-  export interface Character {
+}
+
+export interface Character {
     id: number;
     name: string;
     status: 'Alive' | 'Dead' | 'Unknown';
@@ -28,5 +28,5 @@ export interface Location {
     episode: string[];
     url: string;
     created: string;
-  }
-  
+}
+
