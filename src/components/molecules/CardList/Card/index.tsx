@@ -1,7 +1,17 @@
+import { Character } from '../../../../types';
 
-const Card = () => {
-  return <div>Card</div>
+type Props = {
+  character: Character;
 }
 
-export default Card
+const Card = ({ character }: Props) => {
+  return (
+    <div>
+      <img src={character.image} alt={character.name} />
+      <h3>{character.name}</h3>
+      <p>{character.species}</p>
+    </div>
+  );
+}
 
+export default Card; 

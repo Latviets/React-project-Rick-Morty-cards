@@ -1,8 +1,19 @@
 import Card from './Card';
+import { Character } from '../../../types';
 
-const CardList = () => {
-  return <div><Card /></div>
+type Props = {
+  characters: Character[]
 }
 
-export default CardList
+const CardList = ({ characters }: Props) => {
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+      {characters.map((character) => (
+        <Card key={character.id} character={character} />
+      ))}
+    </div>
+  );
+}
+
+export default CardList;
 
