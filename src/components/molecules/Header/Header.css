@@ -1,15 +1,58 @@
 .header {
-  padding: 80px;
+  position: relative;
+  height: 400px;
+  width: 100%;
   text-align: center;
-  background: #1abc9c;
-  color: rgb(2, 0, 0);
-  font-size: 30px;
+  color: white;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('/rickmorty.png') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   margin-bottom: 20px;
 }
 
 .header h1 {
-  font-size: 50px;
-  margin-bottom: 20px;
+  font-size: 4rem;
+  font-weight: bold;
+  text-shadow:
+    3px 3px 0 #000,
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  color: #00b300;
+  /* Darker green */
+  animation: glow 1s ease-in-out infinite alternate;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 30px #008000,
+      0 0 40px #008000;
+  }
+
+  to {
+    text-shadow: 0 0 20px #fff,
+      0 0 30px #006400,
+      0 0 40px #006400,
+      0 0 50px #006400;
+  }
+}
+
+.top-right-text {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: rgb(17, 229, 81);
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .filter-container {

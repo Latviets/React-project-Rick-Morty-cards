@@ -51,6 +51,7 @@ const CharacterCard = ({ character, isSelected, isDimmed, onSelect }: Props) => 
           <p><strong>Gender:</strong> {character.gender}</p>
           <p><strong>Origin:</strong> {character.origin.name}</p>
           <p><strong>Location:</strong> {character.location.name}</p>
+          
           <button 
             onClick={(e) => {
               e.stopPropagation();

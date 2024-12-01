@@ -9,7 +9,8 @@ type Props = {
 const Header = ({ onFilterChange, currentFilter }: Props) => {
     return (
         <div className="header">
-            <h1>Rick and Morty Characters</h1>
+            <div className="top-right-text">Created by Edvīns Vecvērdiņš-Ūdris</div>
+            <h1>Rick & Morty Characters</h1>
             <div className="filter-container">
                 <Button
                     onClick={() => onFilterChange('all')}
