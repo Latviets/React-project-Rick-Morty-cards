@@ -1,15 +1,29 @@
-import "./style.module.css";
+import './Button.css'
 
-type Props = {
-  onClick: () => void;
+type ButtonProps = {
+  onClick?: () => void
+  disabled?: boolean
+  children: React.ReactNode
+  variant?: 'primary' | 'secondary'
+  className?: string
 }
 
-const Button = ({ onClick }: Props) => {
+const Button = ({
+  onClick,
+  disabled = false,
+  children,
+  variant = 'primary',
+  className = ''
+}: ButtonProps) => {
   return (
-    <button onClick={onClick}>
-      Get Characters
+    <button
+      className={`button ${variant} ${className}`}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {children}
     </button>
-  );
-};
+  )
+}
 
-export default Button; 
+export default Button

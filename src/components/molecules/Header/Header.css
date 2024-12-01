@@ -1,0 +1,41 @@
+.header {
+  padding: 80px;
+  text-align: center;
+  background: #1abc9c;
+  color: rgb(2, 0, 0);
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.header h1 {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+
+.filter-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.filter-button.active {
+  background: white;
+  color: #1abc9c;
+}
+
+.filter-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.filter-button:hover {
+  background: white;
+  color: #1abc9c;
+}

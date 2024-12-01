@@ -1,19 +1,33 @@
-import Card from './Card';
-import { Character } from '../../../types';
+import { Character } from '../../../types'
+import CharacterCard from './CharacterCard'
+import { useState } from 'react'
 
 type Props = {
   characters: Character[]
 }
 
-const CardList = ({ characters }: Props) => {
+const CharactersList = ({ characters }: Props) => {
+  const [selectedId, setSelectedId] = useState<number | null>(null)
+
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+    <div style={{ 
+      display: 'grid', 
+      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+      gap: '1rem',
+      padding: '1rem',
+      position: 'relative',
+    }}>
       {characters.map((character) => (
-        <Card key={character.id} character={character} />
+        <CharacterCard 
+          key={character.id} 
+          character={character}
+          isSelected={selectedId === character.id}
+          onSelect={setSelectedId}
+          isDimmed={selectedId !== null && selectedId !== character.id}
+        />
       ))}
     </div>
-  );
+  )
 }
 
-export default CardList;
-
+export default CharactersList

@@ -1,14 +1,13 @@
 export interface ApiResponse {
-    info: PageInfo;
+    info: {
+        count: number;
+        pages: number;
+        next: string | null;
+        prev: string | null;
+    }
     results: Character[];
 }
 
-export interface PageInfo {
-    count: number;
-    pages: number;
-    next: string | null;
-    prev: string | null;
-}
 
 interface Location {
     name: string;
