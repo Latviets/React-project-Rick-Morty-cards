@@ -1,4 +1,4 @@
-import { Character } from '../../../types'
+import { Character } from '../../CharacterType/types'
 import CharacterCard from './CharacterCard'
 import { useState } from 'react'
 

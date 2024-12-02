@@ -1,4 +1,4 @@
-import { Character } from '../../../../types'
+import { Character } from '../../../CharacterType/types'
 import CharacterModal from '../../../molecules/CharacterModal'
 import { useState } from 'react'
 

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import './App.css'
 import { useState, useEffect } from 'react'
-import { ApiResponse, Character } from './types'
+import { ApiResponse, Character } from './components/CharacterType/types'
 import CardList from './components/molecules/CardList'
 import Header from './components/molecules/Header'
 import Button from './components/Buttons'
