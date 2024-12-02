@@ -1,48 +1,34 @@
 import { Character } from '../../../types'
+import './CharacterModal.css'
 
 type Props = {
-  character: Character | null
+  character: Character
   onClose: () => void
 }
 
 const CharacterModal = ({ character, onClose }: Props) => {
-  if (!character) return null
-
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0,0,0,0.7)',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center'
-    }}>
-      <div style={{
-        backgroundColor: 'white',
-        padding: '20px',
-        borderRadius: '8px',
-        maxWidth: '500px',
-        width: '90%'
-      }}>
-        <button 
-          onClick={onClose}
-          style={{ float: 'right' }}
-        >
-          ✕
-        </button>
-        <img src={character.image} alt={character.name} style={{ width: '100%' }} />
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <img
+          src={character.image}
+          alt={character.name}
+          className="modal-image"
+          loading="eager"
+        />
         <h2>{character.name}</h2>
-        <p>Status: {character.status}</p>
-        <p>Species: {character.species}</p>
-        <p>Gender: {character.gender}</p>
-        <p>Origin: {character.origin.name}</p>
-        <p>Location: {character.location.name}</p>
+        <p><strong>Status:</strong> {character.status}</p>
+        <p><strong>Species:</strong> {character.species}</p>
+        <p><strong>Gender:</strong> {character.gender}</p>
+        <p><strong>Origin:</strong> {character.origin.name}</p>
+        <p><strong>Location:</strong> {character.location.name}</p>
+
+        <button onClick={onClose} className="modal-close">
+          Close
+        </button>
       </div>
     </div>
   )
 }
 
-export default CharacterModal 
+export default CharacterModal
