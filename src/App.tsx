@@ -18,12 +18,12 @@ function App() {
     try {
       setIsLoading(true)
       let allCharacters: Character[] = []
-      let nextPage = 'https://rickandmortyapi.com/api/character'
+      let nextPage: string | null = 'https://rickandmortyapi.com/api/character'
 
       while (nextPage) {
-        const response = await axios.get<ApiResponse>(nextPage)
+        const response: { data: ApiResponse } = await axios.get(nextPage)
         allCharacters = [...allCharacters, ...response.data.results]
-        nextPage = response.data.info.next
+        nextPage = response.data.info.next ?? null
       }
 
       setCharacters(allCharacters)
