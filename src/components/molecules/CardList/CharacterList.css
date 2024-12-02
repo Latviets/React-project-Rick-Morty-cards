@@ -1,0 +1,13 @@
+.card-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    position: relative;
+  }
+  
+  .card-wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
