@@ -20,17 +20,17 @@ jobs:
       - name: Build
         run: npm run build
       
-      - name: Start application
+      - name: Start dev server
         run: |
           npm run dev &
-          npx wait-on http://localhost:5173
+          npx wait-on http://localhost:5173 --timeout 60000
       
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       
       - name: Run Playwright tests
-        run: npx playwright test tests/character-list.ts
-      
+        run: npx playwright test
+        
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
