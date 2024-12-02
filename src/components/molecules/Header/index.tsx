@@ -36,6 +36,12 @@ const Header = ({ onFilterChange, currentFilter }: Props) => {
                 >
                     Unknown
                 </Button>
+                <Button
+                    onClick={() => onFilterChange('favorites')}
+                    className={currentFilter === 'favorites' ? 'active' : ''}
+                >
+                    Favorites
+                </Button>
             </div>
         </div>
     )

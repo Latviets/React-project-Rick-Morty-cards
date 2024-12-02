@@ -1,33 +1,36 @@
 import { Character } from '../../CharacterType/types'
 import CharacterCard from './CharacterCard'
 import { useState } from 'react'
+import './CharacterList.css'
 
 type Props = {
   characters: Character[]
+  onFavoriteToggle: (id: number) => void
+  favorites: Set<number>
 }
 
-const CharactersList = ({ characters }: Props) => {
+const CardList = ({ characters, onFavoriteToggle, favorites }: Props) => {
   const [selectedId, setSelectedId] = useState<number | null>(null)
 
   return (
-    <div style={{ 
-      display: 'grid', 
-      gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
-      gap: '1rem',
-      padding: '1rem',
-      position: 'relative',
-    }}>
+    <div className="card-list">
       {characters.map((character) => (
-        <CharacterCard 
-          key={character.id} 
-          character={character}
-          isSelected={selectedId === character.id}
-          onSelect={setSelectedId}
-          isDimmed={selectedId !== null && selectedId !== character.id}
-        />
+        <div
+          key={character.id}
+          className="card-wrapper"
+        >
+          <CharacterCard
+            character={character}
+            isSelected={character.id === selectedId}
+            isDimmed={selectedId !== null && character.id !== selectedId}
+            onSelect={setSelectedId}
+            onFavoriteToggle={onFavoriteToggle}
+            favorites={favorites}
+          />
+        </div>
       ))}
     </div>
   )
 }
 
-export default CharactersList
+export default CardList

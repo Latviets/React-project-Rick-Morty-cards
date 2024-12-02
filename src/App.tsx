@@ -1,22 +1,22 @@
 import axios from 'axios'
 import './App.css'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { ApiResponse, Character } from './components/CharacterType/types'
 import CardList from './components/molecules/CardList'
 import Header from './components/molecules/Header'
 import Button from './components/Buttons'
+import { useQuery } from '@tanstack/react-query'
 
 function App() {
-  const [characters, setCharacters] = useState<Character[]>([])
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([])
   const [currentFilter, setCurrentFilter] = useState('all')
-  const [isLoading, setIsLoading] = useState(false)
   const [currentPage, setCurrentPage] = useState(1)
+  const [favorites, setFavorites] = useState<Set<number>>(new Set())
   const ITEMS_PER_PAGE = 18
 
-  const getCharacters = async () => {
-    try {
-      setIsLoading(true)
+  const { data: characters, isLoading } = useQuery({
+    queryKey: ['characters'],
+    queryFn: async () => {
       let allCharacters: Character[] = []
       let nextPage: string | null = 'https://rickandmortyapi.com/api/character'
 
@@ -25,31 +25,35 @@ function App() {
         allCharacters = [...allCharacters, ...response.data.results]
         nextPage = response.data.info.next ?? null
       }
-
-      setCharacters(allCharacters)
       setFilteredCharacters(allCharacters)
-    } catch (error) {
-      console.error('Error fetching characters:', error)
-    } finally {
-      setIsLoading(false)
+      return allCharacters
     }
-  }
-
-  useEffect(() => {
-    getCharacters()
-  }, [])
+  })
 
   const handleFilterChange = (filter: string) => {
     setCurrentFilter(filter)
     setCurrentPage(1)
     if (filter === 'all') {
-      setFilteredCharacters(characters)
+      setFilteredCharacters(characters || [])
+    } else if (filter === 'favorites') {
+      const favoritedChars = (characters || []).filter(char => favorites.has(char.id))
+      setFilteredCharacters(favoritedChars)
     } else {
-      const filtered = characters.filter(char =>
+      const filtered = (characters || []).filter(char =>
         char.status.toLowerCase() === filter.toLowerCase()
       )
       setFilteredCharacters(filtered)
     }
+  }
+
+  const toggleFavorite = (id: number) => {
+    const newFavorites = new Set(favorites)
+    if (newFavorites.has(id)) {
+      newFavorites.delete(id)
+    } else {
+      newFavorites.add(id)
+    }
+    setFavorites(newFavorites)
   }
 
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE
@@ -69,7 +73,11 @@ function App() {
         </div>
       ) : (
         <>
-          <CardList characters={currentItems} />
+          <CardList
+            characters={currentItems}
+            onFavoriteToggle={toggleFavorite}
+            favorites={favorites}
+          />
           <div className="pagination">
             <Button
               className="pagination-button"
