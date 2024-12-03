@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Character } from '../../../CharacterType/types'
 import CharacterModal from '../../../molecules/CharacterModal'
 import './CharacterCard.css'
+import { Favorites } from '../../../../hooks/useFavorites'
 
 type Props = {
   character: Character
@@ -9,7 +10,7 @@ type Props = {
   isDimmed: boolean
   onSelect: (id: number | null) => void
   onFavoriteToggle: (id: number) => void
-  favorites: Set<number>
+  favorites: Favorites
 }
 
 const CharacterCard = ({
@@ -29,13 +30,13 @@ const CharacterCard = ({
         onClick={() => setShowModal(true)}
       >
         <button
-          className={`favorite-button ${favorites.has(character.id) ? 'active' : ''}`}
+          className={`favorite-button ${favorites.some(favorite => favorite.id === character.id) ? 'active' : ''}`}
           onClick={(e) => {
             e.stopPropagation()
             onFavoriteToggle(character.id)
           }}
         >
-          {favorites.has(character.id) ? '♥' : '♡'}
+          {favorites.some(favorite => favorite.id === character.id) ? '♥' : '♡'}
         </button>
 
         <img

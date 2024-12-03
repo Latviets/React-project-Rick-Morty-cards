@@ -2,11 +2,12 @@ import { Character } from '../../CharacterType/types'
 import CharacterCard from './CharacterCard'
 import { useState } from 'react'
 import './CharacterList.css'
+import { Favorites } from '../../../hooks/useFavorites'
 
 type Props = {
   characters: Character[]
   onFavoriteToggle: (id: number) => void
-  favorites: Set<number>
+  favorites: Favorites
 }
 
 const CardList = ({ characters, onFavoriteToggle, favorites }: Props) => {

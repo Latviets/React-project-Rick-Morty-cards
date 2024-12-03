@@ -6,12 +6,17 @@ import CardList from './components/molecules/CardList'
 import Header from './components/molecules/Header'
 import Button from './components/Buttons'
 import { useQuery } from '@tanstack/react-query'
+import { useFavorites } from './hooks/useFavorites'
 
-function App() {
+interface AppProps {
+  initialFilter?: string;
+}
+
+function App({ initialFilter = 'all' }: AppProps) {
+  const { favorites, toggleFavorite } = useFavorites()
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([])
-  const [currentFilter, setCurrentFilter] = useState('all')
+  const [currentFilter, setCurrentFilter] = useState(initialFilter)
   const [currentPage, setCurrentPage] = useState(1)
-  const [favorites, setFavorites] = useState<Set<number>>(new Set())
   const ITEMS_PER_PAGE = 18
 
   const { data: characters, isLoading } = useQuery({
@@ -36,7 +41,7 @@ function App() {
     if (filter === 'all') {
       setFilteredCharacters(characters || [])
     } else if (filter === 'favorites') {
-      const favoritedChars = (characters || []).filter(char => favorites.has(char.id))
+      const favoritedChars = (characters || []).filter(char => favorites && favorites.find(favorite => favorite.id === char.id))
       setFilteredCharacters(favoritedChars)
     } else {
       const filtered = (characters || []).filter(char =>
@@ -44,16 +49,6 @@ function App() {
       )
       setFilteredCharacters(filtered)
     }
-  }
-
-  const toggleFavorite = (id: number) => {
-    const newFavorites = new Set(favorites)
-    if (newFavorites.has(id)) {
-      newFavorites.delete(id)
-    } else {
-      newFavorites.add(id)
-    }
-    setFavorites(newFavorites)
   }
 
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE
@@ -76,7 +71,7 @@ function App() {
           <CardList
             characters={currentItems}
             onFavoriteToggle={toggleFavorite}
-            favorites={favorites}
+            favorites={favorites || []}
           />
           <div className="pagination">
             <Button

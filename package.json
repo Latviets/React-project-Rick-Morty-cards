@@ -10,10 +10,11 @@
     "preview": "vite preview",
     "test:h": "playwright test --headed",
     "test": "playwright test",
-    "json-server": "json-server --watch db.json --port 5174"
+    "json-server": "json-server --watch db.json --port 3000"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.62.1",
+    "@tanstack/react-router": "^1.85.4",
     "axios": "^1.7.8",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
