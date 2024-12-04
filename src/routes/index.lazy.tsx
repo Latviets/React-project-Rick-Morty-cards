@@ -17,6 +17,7 @@ function Index() {
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([]);
   const [currentFilter, setCurrentFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState('');
   const ITEMS_PER_PAGE = 20;
 
   const { data: characters, isLoading: charactersLoading } = useQuery<Character[]>({
@@ -66,11 +67,13 @@ function Index() {
       <Header
         onFilterChange={handleFilterChange}
         currentFilter={currentFilter}
+        onSearch={setSearchTerm}
       />
       <CardList
         characters={currentItems}
         onFavoriteToggle={toggleFavorite}
         favorites={favorites}
+        searchTerm={searchTerm}
       />
       <div className="flex justify-center items-center gap-3 p-5">
         <button
