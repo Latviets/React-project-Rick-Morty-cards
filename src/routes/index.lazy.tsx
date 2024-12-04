@@ -21,7 +21,7 @@ function Index() {
   const ITEMS_PER_PAGE = 20;
 
   const { data: characters, isLoading: charactersLoading } = useQuery<Character[]>({
-    queryKey: ['characters'],
+    queryKey: ['characters'],    
     queryFn: async () => {
       let allCharacters: Character[] = [];
       let nextPage: string | null = 'https://rickandmortyapi.com/api/character';
@@ -56,7 +56,7 @@ function Index() {
 
   const filteredAndSearchedCharacters = filteredCharacters.filter(character => {
     if (!searchTerm) return true;
-    
+
     const searchTermLower = searchTerm.toLowerCase().trim();
     const genderMatch = character.gender.toLowerCase() === searchTermLower;
     const partialMatch = [
