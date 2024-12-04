@@ -17,7 +17,7 @@ function Index() {
   const [filteredCharacters, setFilteredCharacters] = useState<Character[]>([]);
   const [currentFilter, setCurrentFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 18;
+  const ITEMS_PER_PAGE = 20;
 
   const { data: characters, isLoading: charactersLoading } = useQuery<Character[]>({
     queryKey: ['characters'],
@@ -41,7 +41,7 @@ function Index() {
     if (filter === 'all') {
       setFilteredCharacters(characters || []);
     } else if (filter === 'favorites') {
-      const favoritedChars = (characters || []).filter(char => 
+      const favoritedChars = (characters || []).filter(char =>
         favorites.some(fav => fav.characterId === char.id)
       );
       setFilteredCharacters(favoritedChars);
@@ -85,7 +85,7 @@ function Index() {
         </span>
         <button
           className="px-4 py-2 border-2 border-[#1abc9c] bg-white text-[#1abc9c] cursor-pointer rounded hover:bg-[#1abc9c] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
-          onClick={() => setCurrentPage(prev => 
+          onClick={() => setCurrentPage(prev =>
             Math.min(prev + 1, Math.ceil(filteredCharacters.length / ITEMS_PER_PAGE))
           )}
           disabled={currentPage === Math.ceil(filteredCharacters.length / ITEMS_PER_PAGE)}

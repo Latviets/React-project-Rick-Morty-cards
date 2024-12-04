@@ -51,6 +51,16 @@ module.exports = {
   				'5': 'hsl(var(--chart-5))'
   			}
   		}
+  	},
+  	keyframes: {
+  		glow: {
+  			'from': {
+  				textShadow: '0 0 10px #fff, 0 0 20px #fff, 0 0 30px #008000, 0 0 40px #008000'
+  			},
+  			'to': {
+  				textShadow: '0 0 20px #fff, 0 0 30px #006400, 0 0 40px #006400, 0 0 50px #006400'
+  			}
+  		}
   	}
   },
   plugins: [require("tailwindcss-animate")],

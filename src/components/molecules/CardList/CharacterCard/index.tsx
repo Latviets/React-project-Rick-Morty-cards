@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Character } from '../../../CharacterType/types'
 import CharacterModal from '../../../molecules/CharacterModal'
-import './CharacterCard.css'
 import { Favorite } from '../../../../hooks/useFavorites'
 
 type Props = {
@@ -22,33 +21,48 @@ const CharacterCard = ({
   favorites
 }: Props) => {
   const [showModal, setShowModal] = useState(false)
-
-  const isFavorite = favorites.some(favorite => favorite.characterId === character.id)
+  const isFavorite = favorites.some(fav => fav.characterId === character.id)
 
   return (
     <>
       <div
-        className={`character-card ${isSelected ? 'selected' : ''} ${isDimmed ? 'dimmed' : ''}`}
-        onClick={() => setShowModal(true)}
+        className={`
+          w-[200px] mx-auto border-2 border-black p-2 rounded-lg cursor-pointer 
+          relative transition-all duration-300 bg-white shadow-md
+          ${isSelected ? 'transform -translate-y-2.5 shadow-2xl z-10' : ''}
+          ${isDimmed ? 'opacity-50' : ''}
+        `}
+        onClick={() => {
+          setShowModal(true)
+          onSelect(character.id)
+        }}
       >
         <button
-          className={`favorite-button ${isFavorite ? 'active' : ''}`}
           onClick={(e) => {
             e.stopPropagation()
             onFavoriteToggle(character.id)
           }}
+          className={`
+            absolute top-1.5 right-1.5 bg-white border border-black rounded-full 
+            w-5 h-5 flex items-center justify-center cursor-pointer z-10 text-sm p-0
+            ${isFavorite ? 'text-red-500' : 'text-white'}
+          `}
         >
-          {isFavorite ? '♥' : '♡'}
+          ♥
         </button>
 
         <img
           src={character.image}
           alt={character.name}
-          className="character-image"
+          className="w-full rounded transition-all duration-300"
         />
-        <h3 className="character-name">{character.name}</h3>
-        <p className="character-status">
-          <strong>Status: </strong>{character.status}
+
+        <h3 className="my-1.5 text-sm">
+          {character.name}
+        </h3>
+
+        <p className="my-0.5 text-xs">
+          {character.status}
         </p>
       </div>
 
