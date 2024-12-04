@@ -1,16 +1,20 @@
 {
   "favorites": [
     {
-      "id": 1
+      "id": "58d9",
+      "characterId": 1
     },
     {
-      "id": 5
+      "id": "f34e",
+      "characterId": 2
     },
     {
-      "id": 2
+      "id": "3897",
+      "characterId": 4
     },
     {
-      "id": 3
+      "id": "f6e7",
+      "characterId": 3
     }
   ]
 }

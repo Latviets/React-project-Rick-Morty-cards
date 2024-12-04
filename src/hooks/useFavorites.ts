@@ -1,55 +1,39 @@
-
 import axios from 'axios';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
 export interface Favorite {
-    id: number;
+    id: string;
+    characterId: number;
 }
-export type Favorites = Favorite[];
-
 
 export function useFavorites() {
     const queryClient = useQueryClient();
 
-
-    const { data: favorites, isLoading, error } = useQuery({
+    const { data: favorites = [], isLoading } = useQuery({
         queryKey: ['favorites'],
         queryFn: async () => {
-            try {
-                const response = await axios.get<Favorites>('http://localhost:3000/favorites');
-                return response.data || [];
-            } catch (error) {
-                console.error("error", error);
-                return [];
-            }
+            const response = await axios.get<Favorite[]>('http://localhost:3000/favorites');
+            return response.data || [];
         },
-        staleTime: 0,
-        refetchOnMount: true,
-        refetchOnWindowFocus: true
     });
 
-
-    const toggleFavorite = async (id: number) => {
-        try {
-
-            if (favorites && favorites.some(favorite => favorite.id === id)) {
-                return;
+    const toggleFavoriteMutation = useMutation({
+        mutationFn: async (characterId: number) => {
+            const existingFavorite = favorites.find(fav => fav.characterId === characterId);
+            if (existingFavorite) {
+                await axios.delete(`http://localhost:3000/favorites/${existingFavorite.id}`);
+            } else {
+                await axios.post('http://localhost:3000/favorites', { characterId });
             }
-
-            await axios.post('http://localhost:3000/favorites', {
-                id,
-            });
-
+        },
+        onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ['favorites'] });
-        } catch (error) {
-            console.error('Error toggling favorite:', error);
         }
-    };
+    });
 
     return {
         favorites,
-        toggleFavorite,
-        isLoading,
-        error
+        toggleFavorite: toggleFavoriteMutation.mutate,
+        isLoading
     };
 } 
