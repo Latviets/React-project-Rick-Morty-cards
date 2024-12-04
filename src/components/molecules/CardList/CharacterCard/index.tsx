@@ -57,7 +57,7 @@ const CharacterCard = ({
           className="w-full rounded transition-all duration-300"
         />
 
-        <h3 className="my-1.5 text-sm">
+        <h3 className="my-1.5 text-sm font-bold">
           {character.name}
         </h3>
 

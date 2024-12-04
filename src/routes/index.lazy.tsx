@@ -54,13 +54,30 @@ function Index() {
     }
   };
 
+  const filteredAndSearchedCharacters = filteredCharacters.filter(character => {
+    if (!searchTerm) return true;
+    
+    const searchTermLower = searchTerm.toLowerCase().trim();
+    const genderMatch = character.gender.toLowerCase() === searchTermLower;
+    const partialMatch = [
+      character.name,
+      character.status,
+      character.species,
+      character.type,
+      character.origin.name,
+      character.location.name
+    ].some(field => field.toLowerCase().includes(searchTermLower));
+
+    return genderMatch || partialMatch;
+  });
+
   if (charactersLoading || favoritesLoading) {
     return <div className="loading-container">Loading...</div>;
   }
 
   const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
   const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-  const currentItems = filteredCharacters.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredAndSearchedCharacters.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className="min-h-screen bg-[#f8f3f3] m-0 p-0">
@@ -84,14 +101,14 @@ function Index() {
           Previous
         </button>
         <span className="text-base text-[#666]">
-          Page {currentPage} of {Math.ceil(filteredCharacters.length / ITEMS_PER_PAGE)}
+          Page {currentPage} of {Math.ceil(filteredAndSearchedCharacters.length / ITEMS_PER_PAGE)}
         </span>
         <button
           className="px-4 py-2 border-2 border-[#1abc9c] bg-white text-[#1abc9c] cursor-pointer rounded hover:bg-[#1abc9c] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
           onClick={() => setCurrentPage(prev =>
-            Math.min(prev + 1, Math.ceil(filteredCharacters.length / ITEMS_PER_PAGE))
+            Math.min(prev + 1, Math.ceil(filteredAndSearchedCharacters.length / ITEMS_PER_PAGE))
           )}
-          disabled={currentPage === Math.ceil(filteredCharacters.length / ITEMS_PER_PAGE)}
+          disabled={currentPage === Math.ceil(filteredAndSearchedCharacters.length / ITEMS_PER_PAGE)}
         >
           Next
         </button>

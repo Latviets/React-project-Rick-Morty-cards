@@ -1,4 +1,3 @@
-import Button from "../../Buttons"
 
 type Props = {
     onFilterChange: (filter: string) => void
@@ -18,36 +17,36 @@ const Header = ({ onFilterChange, currentFilter, onSearch }: Props) => {
             </h1>
 
             <div className="mt-5 flex justify-center gap-2.5">
-                <Button
+                <button
                     onClick={() => onFilterChange('all')}
-                    className={`px-5 py-2.5 text-base border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#1abc9c] rounded transition-all duration-300 ${currentFilter === 'all' ? 'bg-white text-[#1abc9c]' : ''}`}
+                    className={`px-5 py-2.5 text-base border-2 border-[#1abc9c] ${currentFilter === 'all' ? 'bg-[#1abc9c] text-white' : 'bg-white text-[#1abc9c]'} cursor-pointer rounded hover:bg-[#1abc9c] hover:text-white transition-all duration-300`}
                 >
                     All
-                </Button>
-                <Button
+                </button>
+                <button
                     onClick={() => onFilterChange('alive')}
-                    className={`px-5 py-2.5 text-base border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#1abc9c] rounded transition-all duration-300 ${currentFilter === 'alive' ? 'bg-white text-[#1abc9c]' : ''}`}
+                    className={`px-5 py-2.5 text-base border-2 border-[#1abc9c] ${currentFilter === 'alive' ? 'bg-[#1abc9c] text-white' : 'bg-white text-[#1abc9c]'} cursor-pointer rounded hover:bg-[#1abc9c] hover:text-white transition-all duration-300`}
                 >
                     Alive
-                </Button>
-                <Button
+                </button>
+                <button
                     onClick={() => onFilterChange('dead')}
-                    className={`px-5 py-2.5 text-base border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#1abc9c] rounded transition-all duration-300 ${currentFilter === 'dead' ? 'bg-white text-[#1abc9c]' : ''}`}
+                    className={`px-5 py-2.5 text-base border-2 border-[#1abc9c] ${currentFilter === 'dead' ? 'bg-[#1abc9c] text-white' : 'bg-white text-[#1abc9c]'} cursor-pointer rounded hover:bg-[#1abc9c] hover:text-white transition-all duration-300`}
                 >
                     Dead
-                </Button>
-                <Button
+                </button>
+                <button
                     onClick={() => onFilterChange('unknown')}
-                    className={`px-5 py-2.5 text-base border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#1abc9c] rounded transition-all duration-300 ${currentFilter === 'unknown' ? 'bg-white text-[#1abc9c]' : ''}`}
+                    className={`px-5 py-2.5 text-base border-2 border-[#1abc9c] ${currentFilter === 'unknown' ? 'bg-[#1abc9c] text-white' : 'bg-white text-[#1abc9c]'} cursor-pointer rounded hover:bg-[#1abc9c] hover:text-white transition-all duration-300`}
                 >
                     Unknown
-                </Button>
-                <Button
+                </button>
+                <button
                     onClick={() => onFilterChange('favorites')}
-                    className={`px-5 py-2.5 text-base border-2 border-white bg-transparent text-white hover:bg-white hover:text-[#1abc9c] rounded transition-all duration-300 ${currentFilter === 'favorites' ? 'bg-white text-[#1abc9c]' : ''}`}
+                    className={`px-5 py-2.5 text-base border-2 border-[#1abc9c] ${currentFilter === 'favorites' ? 'bg-[#1abc9c] text-white' : 'bg-white text-[#1abc9c]'} cursor-pointer rounded hover:bg-[#1abc9c] hover:text-white transition-all duration-300`}
                 >
                     Favorites
-                </Button>
+                </button>
             </div>
 
             <div className="w-full max-w-xl mx-auto mt-8 px-4">
