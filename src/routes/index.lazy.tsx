@@ -1,7 +1,8 @@
+import '../main.css'
 import { createLazyFileRoute } from '@tanstack/react-router'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import { ApiResponse, Character } from '../components/CharacterType/types'
 import CardList from '../components/molecules/CardList'
 import Header from '../components/molecules/Header'
@@ -18,19 +19,20 @@ function Index() {
   const [currentPage, setCurrentPage] = useState(1);
   const ITEMS_PER_PAGE = 18;
 
-  const { data: characters, isLoading: charactersLoading } = useQuery({
+  const { data: characters, isLoading: charactersLoading } = useQuery<Character[]>({
     queryKey: ['characters'],
     queryFn: async () => {
       let allCharacters: Character[] = [];
       let nextPage: string | null = 'https://rickandmortyapi.com/api/character';
 
       while (nextPage) {
-        const response: AxiosResponse<ApiResponse> = await axios.get(nextPage);
+        const response: { data: ApiResponse } = await axios.get(nextPage);
         allCharacters = [...allCharacters, ...response.data.results];
         nextPage = response.data.info.next;
       }
+      setFilteredCharacters(allCharacters);
       return allCharacters;
-    },
+    }
   });
 
   const handleFilterChange = (filter: string) => {
@@ -60,7 +62,7 @@ function Index() {
   const currentItems = filteredCharacters.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div>
+    <div className="min-h-screen bg-[#f8f3f3] m-0 p-0">
       <Header
         onFilterChange={handleFilterChange}
         currentFilter={currentFilter}
@@ -70,19 +72,19 @@ function Index() {
         onFavoriteToggle={toggleFavorite}
         favorites={favorites}
       />
-      <div className="pagination">
+      <div className="flex justify-center items-center gap-3 p-5">
         <button
-          className="pagination-button"
+          className="px-4 py-2 border-2 border-[#1abc9c] bg-white text-[#1abc9c] cursor-pointer rounded hover:bg-[#1abc9c] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}
         >
           Previous
         </button>
-        <span className="pagination-info">
+        <span className="text-base text-[#666]">
           Page {currentPage} of {Math.ceil(filteredCharacters.length / ITEMS_PER_PAGE)}
         </span>
         <button
-          className="pagination-button"
+          className="px-4 py-2 border-2 border-[#1abc9c] bg-white text-[#1abc9c] cursor-pointer rounded hover:bg-[#1abc9c] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
           onClick={() => setCurrentPage(prev => 
             Math.min(prev + 1, Math.ceil(filteredCharacters.length / ITEMS_PER_PAGE))
           )}
