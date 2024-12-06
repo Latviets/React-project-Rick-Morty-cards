@@ -42,6 +42,5 @@ A separate page where users can see all their favorite characters, utilizing Tan
 
 - Viewing Favorites: Navigate to the favorites page using TanStack Router. The favorites page will display all characters that have been added to favorites.
 
-- Viewing Favorites: Navigate to the favorites page using TanStack Router. The favorites page will display all characters that have been added to favorites.
 
   # Feel free to adjust any sections as needed. If you have more details to add or need further assistance, let me know! 😊
