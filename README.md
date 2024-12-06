@@ -26,7 +26,7 @@ A separate page where users can see all their favorite characters, utilizing Tan
 
 - Run json-server: To start the json-server for mock data, use: npm run json-server
 
-- Run Tests: To ensure everything is working correctly, execute the tests by running: npm test
+- Run Tests: To ensure everything is working correctly, execute the tests by running: npm test:h
 
 ## CI/CD:
 - A GitHub Actions workflow is set up to automate the build and testing process.
