@@ -1,50 +1,47 @@
-# React + TypeScript + Vite
+# Rick & Morty Character Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a front-end application built to interact with the Rick & Morty API. The application is implemented using React with TypeScript and leverages several modern tools and libraries to enhance development and user experience. A GitHub Actions workflow is set up to automate the build and testing process.
 
-Currently, two official plugins are available:
+## Technologies Used:
+- React + TypeScript (with Vite),
+- Tailwind CSS: https://tailwindcss.com/,
+- shadcn/ui: https://ui.shadcn.com/,
+- TanStack Query: https://tanstack.com/query/latest,
+- TanStack Router: https://tanstack.com/router/latest,
+- json-server: https://www.npmjs.com/package/json-server,
+- Playwright: https://playwright.dev/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Functionality:
+- Display List of Characters: 
+The main view displays a list of characters retrieved from the Rick & Morty API, with an option to open a character in full view in a modal.
+- Add Characters to Favorites: Users can add characters to their favorites. 
+- Favorites Page: 
+A separate page where users can see all their favorite characters, utilizing TanStack Router for navigation.
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Download Dependencies: To get started with the project, download the dependencies using the following command: npm install
 
-- Configure the top-level `parserOptions` property like this:
+- Run the Application: To run the application locally, use the following command: npm run dev
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- Run json-server: To start the json-server for mock data, use: npm run json-server
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- Run Tests: To ensure everything is working correctly, execute the tests by running: npm test
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## CI/CD:
+- A GitHub Actions workflow is set up to automate the build and testing process.
+- The workflow includes the following steps:
+   Execute Build: npm run build.
+   Run Playwright Tests: All of the Playwright tests are executed to ensure the application functions correctly.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## Usage
+
+- Displaying Characters: Open the application. The main view will display a list of characters. Click on a character to open it in full view in a modal.
+
+- Adding Characters to Favorites: In the main view, select a character to view its details. Click the "Add to Favorites" button to add the character to your favorites.
+
+- Viewing Favorites: Navigate to the favorites page using TanStack Router. The favorites page will display all characters that have been added to favorites.
+
+- Viewing Favorites: Navigate to the favorites page using TanStack Router. The favorites page will display all characters that have been added to favorites.
+
+  # Feel free to adjust any sections as needed. If you have more details to add or need further assistance, let me know! 😊
