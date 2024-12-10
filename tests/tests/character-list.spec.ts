@@ -2,12 +2,14 @@ import { test, expect, type Page } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('http://localhost:5173');
+  await page.waitForTimeout(3000);
   await page.waitForSelector('.loading-container', { state: 'hidden' });
 });
 
 
 test.describe('Should be able to see Rick and Morty characters', () => {
   test('should see Rick Sanchez in the first page', async ({ page }) => {
+
     await expect(page.getByRole('heading', { name: 'Rick Sanchez' })).toBeVisible();
 
     await page.getByRole('heading', { name: 'Rick Sanchez' }).click();
