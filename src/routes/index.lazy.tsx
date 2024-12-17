@@ -18,7 +18,7 @@ function Index() {
   const [currentFilter, setCurrentFilter] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState('');
-  const ITEMS_PER_PAGE = 40;
+  const ITEMS_PER_PAGE = 20;
 
   const { data: characters, isLoading: charactersLoading } = useQuery<Character[]>({
     queryKey: ['characters'],    
