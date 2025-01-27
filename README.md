@@ -1,7 +1,8 @@
 # Rick & Morty Character Manager
 
 This is a front-end application built to interact with the Rick & Morty API. The application is implemented using React with TypeScript and leverages several modern tools and libraries to enhance development and user experience. A GitHub Actions workflow is set up to automate the build and testing process.
-![rickMorty](https://github.com/user-attachments/assets/afd280c6-7077-482a-86cc-e3a4969a30af)
+
+![rickMorty](https://github.com/user-attachments/assets/a53472d6-15f4-4875-9414-f9323f09f233)
 
 
 ## Technologies Used:
